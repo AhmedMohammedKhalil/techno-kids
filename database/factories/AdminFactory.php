@@ -16,8 +16,18 @@ class AdminFactory extends Factory
      */
     public function definition()
     {
-        return [
-            //
-        ];
+        
+            $this->call(AdminSeeder::class);
+        \App\Models\Admin::factory(1)->create();
+
+    }
+
+    public function unverified()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'email_verified_at' => null,
+            ];
+        });
     }
 }
