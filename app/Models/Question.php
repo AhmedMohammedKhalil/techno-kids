@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
-    protected $guard = 'questions';
 
     protected $fillable = [
         'question', 'answer','image_url','quiz_id'

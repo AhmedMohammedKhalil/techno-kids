@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class LevelSeeder extends Seeder
 {
@@ -14,6 +15,10 @@ class LevelSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('levels')->insert([
+            'name' => 'مبتدئ',
+            'range_start' => 0,
+            'range_end' => 100,
+        ]);
     }
 }

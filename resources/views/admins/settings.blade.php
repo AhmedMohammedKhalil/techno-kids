@@ -1,4 +1,12 @@
 @extends('admins.layout')
 @section('section')
-    <livewire:admin.settings />
+
+<section class="login-area">
+    <div class="container">
+        <div class="login-form">
+            <h2>الإعدادات</h2>
+            <livewire:admin.settings />
+        </div>
+    </div>
+</section>
 @endsection

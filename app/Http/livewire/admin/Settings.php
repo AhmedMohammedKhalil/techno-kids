@@ -11,15 +11,13 @@ use Livewire\Component;
 class Settings extends Component
 {
     use WithFileUploads;
-    public $name='', $email='', $photo,$admin_id='';
+    public $name='', $email='', $image_url,$admin_id='';
 
 
     public function mount() {
         $this->admin_id = Auth::guard('admin')->user()->id;
         $this->name = Auth::guard('admin')->user()->name;
         $this->email = Auth::guard('admin')->user()->email;
-        $this->address = Auth::guard('admin')->user()->address;
-
     }
 
     protected $messages = [
@@ -37,10 +35,10 @@ class Settings extends Component
         'name' => ['required', 'string', 'max:50'],
     ];
 
-    public function updatedPhoto()
+    public function updatedImageUrl()
     {
             $validatedata = $this->validate(
-                ['photo' => ['image','mimes:jpeg,jpg,png','max:2048']]
+                ['image_url' => ['image','mimes:jpeg,jpg,png','max:2048']]
             );
     }
 
@@ -50,18 +48,18 @@ class Settings extends Component
                 $this->rules,
                 [ 'email'   => ['required','email',"unique:admins,email,".$this->admin_id],
         ]));
-        if(!$this->photo)
+        if(!$this->image_url)
             Admin::whereId($this->admin_id)->update($validatedata);
-        if($this->photo) {
-            $photoname = $this->photo->getClientOriginalName();
-            Admin::whereId($this->admin_id)->update(array_merge($validatedata,['photo' => $photoname]));
+        if($this->image_url) {
+            $photoname = $this->image_url->getClientOriginalName();
+            Admin::whereId($this->admin_id)->update(array_merge($validatedata,['image_url' => $photoname]));
             $dir = public_path('img/admins/'.$this->admin_id);
             if(file_exists($dir))
                 File::deleteDirectories($dir);
             else
                 mkdir($dir);
-            $this->photo->storeAs($dir,$photoname);
-            File::deleteDirectory(public_path('uploads/livewire-tmp'));
+            $this->image_url->storeAs('img/admins/'.$this->admin_id,$photoname);
+            File::deleteDirectory(public_path('livewire-tmp'));
         }
         session()->flash('message', "Your Profile Updated.");
         return redirect()->route('admin.profile');

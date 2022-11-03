@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url');
+            $table->text('video_url');
             $table->text('description');
             $table->integer('topic_id')->unsigned();
             $table->foreign('topic_id')

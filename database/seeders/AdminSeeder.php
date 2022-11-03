@@ -20,10 +20,8 @@ class AdminSeeder extends Seeder
     {
         DB::table('admins')->insert([
             'name' => 'المسئول',
-            'email' => 'admin@admin.com',
-            'email_verified_at' => now(),
+            'email' => 'admin@techno.com',
             'password' => Hash::make('123456789'), // password
-            'remember_token' => Str::random(10),
         ]);
     }
 }
