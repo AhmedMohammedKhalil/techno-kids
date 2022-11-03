@@ -31,9 +31,9 @@ class Login extends Component
         if(Auth::guard('admin')->attempt($validatedData)){
 
             session()->flash('message', "تم دخولك ينجاح");
-            return redirect()->route('home');
+            return redirect()->route('admin.dashboard');
         }else{
-            session()->flash('error', 'هناك خطا فى الايميل او الباسورد');
+            return session()->flash('error', 'هناك خطا فى الايميل او الباسورد');
         }
     }
     public function render()

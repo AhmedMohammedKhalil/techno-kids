@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::middleware(['guest:admin', 'guest:user'])->group(function () {
+Route::middleware(['guest:admin', 'guest:kid'])->group(function () {
     Route::get('/admin/login', 'AdminController@showLoginForm')->name('admin.login');
-    Route::get('/user/login', 'UserController@showLoginForm')->name('user.login');
-    Route::get('/user/register', 'UserController@showRegisterForm')->name('user.register');
+    Route::get('/kid/login', 'KidController@showLoginForm')->name('kid.login');
+    Route::get('/kid/register', 'KidController@showRegisterForm')->name('kid.register');
 });
 
 
@@ -28,12 +28,36 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
     Route::get('/settings','AdminController@settings')->name('settings');
     Route::get('/changePassword','AdminController@changePassword')->name('changePassword');
     Route::get('/logout','AdminController@logout')->name('logout');
+
+    Route::prefix('/topics')->name('topic.')->group(function () {
+        Route::get('/','TopicController@index')->name('index');
+        Route::get('/create','TopicController@create')->name('create');
+        Route::get('/edit','TopicController@edit')->name('edit');
+        Route::get('/delete','TopicController@delete')->name('delete');
+    });
+
+    Route::prefix('/videos')->name('video.')->group(function () {
+        Route::get('/','VideoController@index')->name('index');
+        Route::get('/create','VideoController@create')->name('create');
+        Route::get('/edit','VideoController@edit')->name('edit');
+        Route::get('/delete','VideoController@delete')->name('delete');
+    });
+
+    Route::prefix('/quizzes')->name('quiz.')->group(function () {
+        Route::get('/','QuizController@index')->name('index');
+        Route::get('/create','QuizController@create')->name('create');
+        Route::get('/edit','QuizController@edit')->name('edit');
+        Route::get('/delete','QuizController@delete')->name('delete');
+    });
+
+
+
 });
 
 
-Route::middleware(['auth:user'])->name('user.')->prefix('user')->group(function () {
-    Route::get('/profile','UserController@profile')->name('profile');
-    Route::get('/settings','UserController@settings')->name('settings');
-    Route::get('/changePassword','UserController@changePassword')->name('changePassword');
-    Route::get('/logout','UserController@logout')->name('logout');
+Route::middleware(['auth:kid'])->name('kid.')->prefix('kid')->group(function () {
+    Route::get('/profile','KidController@profile')->name('profile');
+    Route::get('/settings','KidController@settings')->name('settings');
+    Route::get('/changePassword','KidController@changePassword')->name('changePassword');
+    Route::get('/logout','KidController@logout')->name('logout');
 });

@@ -3,84 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kid;
-use App\Http\Requests\StoreKidRequest;
-use App\Http\Requests\UpdateKidRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KidController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+   public function showLoginForm() {
+        return view('kids.login');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+
+    public function showRegisterForm() {
+        return view('kids.register');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreKidRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreKidRequest $request)
-    {
-        //
+
+    public function profile() {
+        return view('kids.profile',['page_name' => 'البروفايل']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Kid  $kid
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Kid $kid)
-    {
-        //
+    public function settings() {
+        return view('kids.settings',['page_name' => 'الإعدادات']);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Kid  $kid
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Kid $kid)
-    {
-        //
+    public function changePassword() {
+        return view('kids.changePassword',['page_name' => 'تعديل كلمة السر']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateKidRequest  $request
-     * @param  \App\Models\Kid  $kid
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateKidRequest $request, Kid $kid)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Kid  $kid
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Kid $kid)
-    {
-        //
+    public function logout(Request $request) {
+        Auth::guard('kid')->logout();
+        $request->session()->invalidate();
+        return redirect()->route('home');
     }
 }

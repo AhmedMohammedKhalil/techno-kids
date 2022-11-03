@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Topic extends Model
 {
     use HasFactory;
-    protected $guard = 'topics';
 
     protected $fillable = [
         'title'
@@ -28,5 +27,5 @@ class Topic extends Model
     {
         return $this->hasMany(Video::class);
     }
-    
+
 }

@@ -17,11 +17,11 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->integer('points');
-            $table->string('gender')->nullable();
-            $table->string('age');
+            $table->integer('points')->default(0);
+            $table->string('gender');
+            $table->integer('age');
             $table->string('image_url')->nullable();
-            $table->integer('level_id')->unsigned();
+            $table->integer('level_id')->unsigned()->default(1);
             $table->foreign('level_id')
                 ->references('id')->on('levels')
                 ->onDelete('cascade')->onUpdate('cascade');

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
-use App\Http\Requests\StoreTopicRequest;
-use App\Http\Requests\UpdateTopicRequest;
-
+use Illuminate\Http\Request;
 class TopicController extends Controller
 {
     /**
@@ -15,7 +13,11 @@ class TopicController extends Controller
      */
     public function index()
     {
-        //
+        $topics = Topic::all();
+        $page_name = 'لوحة تحكم المواضيع';
+
+        return view('admins.topics.index',compact('page_name','topics'));
+
     }
 
     /**
@@ -25,30 +27,13 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        $page_name = 'إضافة موضوع جديد';
+        return view('admins.topics.create',compact('page_name'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreTopicRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreTopicRequest $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Topic $topic)
-    {
-        //
-    }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -56,22 +41,14 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function edit(Topic $topic)
+    public function edit(Request $r)
     {
-        //
+        $topic = Topic::whereId($r->id)->first();
+        $page_name = 'تعديل الموضوع';
+        return view('admins.topics.edit',compact('topic','page_name'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTopicRequest  $request
-     * @param  \App\Models\Topic  $topic
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTopicRequest $request, Topic $topic)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -79,8 +56,9 @@ class TopicController extends Controller
      * @param  \App\Models\Topic  $topic
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Topic $topic)
+    public function delete(Request $r)
     {
-        //
+        Topic::destroy($r->id);
+        return redirect()->route('admin.topic.index');
     }
 }

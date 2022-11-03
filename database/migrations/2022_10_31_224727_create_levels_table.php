@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('levels', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('range');
+            $table->integer('range_start');
+            $table->integer('range_end');
             $table->timestamps();
         });
     }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Kid;
+use App\Models\Quiz;
+use App\Models\Topic;
+use App\Models\Video;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,8 +18,12 @@ class AdminController extends Controller
     public function dashboard() {
 
         $page_name = 'الإحصائيات';
-        $user_count = User::all()->count();
-        return view('admins.dashboard',compact('page_name','user_count'));
+        $kids_count = Kid::all()->count();
+        $topics_count = Topic::all()->count();
+        $videos_count = Video::all()->count();
+        $quizzes_count = Quiz::all()->count();
+
+        return view('admins.dashboard',compact('page_name','kids_count','topics_count','videos_count','quizzes_count'));
     }
 
     public function profile() {

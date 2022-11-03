@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Level;
-use App\Http\Requests\StoreLevelRequest;
-use App\Http\Requests\UpdateLevelRequest;
 
 class LevelController extends Controller
 {
@@ -28,16 +26,7 @@ class LevelController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreLevelRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreLevelRequest $request)
-    {
-        //
-    }
+
 
     /**
      * Display the specified resource.
@@ -61,17 +50,7 @@ class LevelController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateLevelRequest  $request
-     * @param  \App\Models\Level  $level
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateLevelRequest $request, Level $level)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

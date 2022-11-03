@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->text('question');
             $table->text('answer');
-            $table->string('image_url');
+            $table->text('image_url');
             $table->integer('quiz_id')->unsigned();
             $table->foreign('quiz_id')
                 ->references('id')->on('quizzes')
