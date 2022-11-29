@@ -2,63 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Topic;
 use App\Models\Video;
+use Illuminate\Support\Facades\File;
+use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $videos = Video::all();
+        $page_name = 'لوحة تحكم الفيديوهات';
+
+        return view('admins.videos.index',compact('page_name','videos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Video $video)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Video $video)
-    {
-        //
+         $page_name = 'إضافة فيديو جديد';
+        return view('admins.videos.create',compact('page_name'));
     }
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Video  $video
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Video $video)
+    public function show(Request $r)
     {
-        //
+        $video = Video::whereId($r->id)->first();
+        $page_name = 'عرض الفيديو';
+        return view('admins.videos.show',compact('page_name','video'));
+    }
+
+
+    public function edit(Request $r)
+    {
+        $video_id = $r->id;
+        $page_name = 'تعديل فيديو جديد';
+        return view('admins.videos.edit',compact('page_name','video_id'));
+    }
+
+
+
+
+    public function delete(Request $r)
+    {
+        Video::destroy($r->id);
+        File::deleteDirectory(public_path('videos/'.$r->id));
+        return redirect()->route('admin.video.index');
     }
 }

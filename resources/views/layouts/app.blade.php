@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" />
     <!-- RTL CSS -->
     <link rel="stylesheet" href="{{ asset('css/rtl.css') }}" />
-
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" />
@@ -49,7 +49,7 @@
             max-width: 100px !important
         }
     </style>
-    <!-- Scripts -->
+
     @livewireStyles
     @stack('css')
 </head>

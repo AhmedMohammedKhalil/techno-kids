@@ -39,6 +39,7 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
     Route::prefix('/videos')->name('video.')->group(function () {
         Route::get('/','VideoController@index')->name('index');
         Route::get('/create','VideoController@create')->name('create');
+        Route::get('/show','VideoController@show')->name('show');
         Route::get('/edit','VideoController@edit')->name('edit');
         Route::get('/delete','VideoController@delete')->name('delete');
     });
