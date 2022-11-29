@@ -23,16 +23,15 @@ class Create extends Component
 
     protected $messages = [
         'required' => 'ممنوع ترك الحقل فارغاَ',
-        'image' => 'لابد ان يكون المف صورة',
         'mimes' => 'لابد ان يكون الفيديو mp4,mkv,flv',
-        'video_url.max' => 'يجب ان تكون الصورة اصغر من 15 ميجا',
+        'video_url.max' => 'يجب ان تكون الفيديو اصغر من 40 ميجا',
         'max' => 'لابد ان يكون الحقل مكون على الاكثر من 255 خانة',
         'gt' => 'لابد ان تحدد الموضوع'
     ];
 
     public function fileComplete() {
         $this->validate([
-            'video_url' => 'mimes:mp4,mkv,flv|max:15360'
+            'video_url' => 'mimes:mp4,mkv,flv|max:102400'
         ]);
     }
 

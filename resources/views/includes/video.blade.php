@@ -1,9 +1,9 @@
-<section class="teacher-details-area">
+<section class="teacher-details-area pt-70">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <div class="col-lg-8 col-md-8 mx-auto">
                 <div class="teacher-details-desc">
-                    <div class="teacher-desc-image">
+                    <div class="teacher-desc-image pb-70">
                         <video id="video" poster="{{ asset('img/blog-details.jpg') }}" style="width: 100%;height:auto"
                             preload="metadata" controls controlsList="nodownload">
                             Your browser does not support the video tag.
@@ -47,6 +47,7 @@
             request.open("GET", videoPath, true);
             request.responseType = "blob";
             request.onload = function() {
+                console.log('done')
                 if (this.status == 200) {
                     track.src = URL.createObjectURL(this.response);
                     track.load();

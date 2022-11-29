@@ -48,6 +48,17 @@
         .navbar-brand img {
             max-width: 100px !important
         }
+
+        a:hover,
+        a:focus {
+            color: #1b0238;
+
+        }
+
+        .widget-area .widget_search {
+            -webkit-box-shadow: 0 0 1.25rem rgb(108 118 134 / 74%);
+            box-shadow: 0 0 1.25rem rgb(108 118 134 / 74%);
+        }
     </style>
 
     @livewireStyles
@@ -89,7 +100,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> الفيديوهات </a>
+                                <a href="{{ route('videos') }}" class="nav-link"> الفيديوهات </a>
                             </li>
 
                             <li class="nav-item">
