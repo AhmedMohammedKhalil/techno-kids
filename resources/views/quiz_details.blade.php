@@ -19,5 +19,5 @@
         </div>
     </div>
     <!-- End Page Banner -->
-    <livewire:search-video>
-    @endsection
+    @include('includes.quiz')
+@endsection

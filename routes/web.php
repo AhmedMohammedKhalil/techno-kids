@@ -18,6 +18,10 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/all-videos', 'HomeController@showVideos')->name('videos');
 Route::get('/topic_details', 'HomeController@showTopic')->name('topic_details');
 Route::get('/video_details', 'HomeController@showVideo')->name('video_details');
+Route::get('/all-quizzes', 'HomeController@showQuizzes')->name('quizzes');
+Route::get('/quiz_details', 'HomeController@showQuiz')->name('quiz_details');
+
+
 
 Route::middleware(['guest:admin', 'guest:kid'])->group(function () {
     Route::get('/admin/login', 'AdminController@showLoginForm')->name('admin.login');

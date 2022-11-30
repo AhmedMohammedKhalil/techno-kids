@@ -19,5 +19,5 @@
         </div>
     </div>
     <!-- End Page Banner -->
-    <livewire:search-video>
+    <livewire:search-quiz>
     @endsection

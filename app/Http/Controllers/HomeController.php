@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Quiz;
 use App\Models\Topic;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -43,5 +44,20 @@ class HomeController extends Controller
         $videos= Video::all();
         $page_name = 'الفيديوهات';
         return view('videos',compact('videos','page_name'));
+    }
+
+    public function showQuizzes()
+    {
+        $quizzes= Quiz::all();
+        $page_name = 'الاختبارات';
+        return view('quizzes',compact('quizzes','page_name'));
+    }
+
+    public function showQuiz(Request $r)
+    {
+        $quiz= Quiz::whereId($r->id)->first();
+        $page_name = $quiz->title;
+        $options = $quiz->questions()->inRandomOrder()->select('answer')->get();
+        return view('quiz_details',compact('quiz','page_name','options'));
     }
 }

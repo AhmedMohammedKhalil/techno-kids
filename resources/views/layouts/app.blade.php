@@ -104,7 +104,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> الأختبارات </a>
+                                <a href="{{ route('quizzes') }}" class="nav-link"> الأختبارات </a>
                             </li>
 
                             <li class="nav-item">
