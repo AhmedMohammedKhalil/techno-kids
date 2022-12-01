@@ -25,9 +25,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $r)
+    { 
+        $quiz=Quiz::where('id',$r->id)->first();
+        $page_name = 'إضافة سؤال جديد';
+        return view('admins.questions.create',compact('page_name','quiz'));
     }
 
 
