@@ -18,7 +18,6 @@ class Edit extends Component
         $this->quiz = Quiz::whereId($this->questionObject->quiz_id)->first();
         $this->answer = $this->questionObject->answer;
         $this->question = $this->questionObject->question;
-        $this->image_url = $this->questionObject->image_url;
         $this->quiz_id = $this->questionObject->quiz_id;
     }
 
@@ -41,12 +40,7 @@ class Edit extends Component
             );
     }
     public function edit(){
-        if($this->quiz->type == 'photo') {
-            $validatedData = $this->validate(array_merge(
-                $this->rules,
-                ['image_url'=>'required']
-            ));
-        } else {
+        if($this->quiz->type == 'text') {
             $validatedData = $this->validate(array_merge(
                 $this->rules,
                 ['question'=>'required|max:255']
@@ -54,15 +48,22 @@ class Edit extends Component
         }
 
         if($this->quiz->type == 'photo') {
-            $photoname = $this->image_url->getClientOriginalName();
-            Question::whereId($this->questionObject->id)->update(array_merge($validatedData,['image_url' => $photoname]));
-            $dir = public_path('img/questions/'.$this->questionObject->id);
-            if(file_exists($dir))
-                File::deleteDirectory($dir);
-            else
-                mkdir($dir);
-            $this->image_url->storeAs('img/questions/'.$this->questionObject->id,$photoname);
-            File::deleteDirectory(public_path('livewire-tmp'));
+            if($this->image_url){
+                $validatedData = $this->validate();
+                $photoname = $this->image_url->getClientOriginalName();
+                Question::whereId($this->questionObject->id)->update(array_merge($validatedData,['image_url' => $photoname]));
+                $dir = public_path('img/questions/'.$this->questionObject->id);
+                if(file_exists($dir))
+                    File::deleteDirectory($dir);
+                else
+                    mkdir($dir);
+                $this->image_url->storeAs('img/questions/'.$this->questionObject->id,$photoname);
+                File::deleteDirectory(public_path('livewire-tmp'));
+            }
+            else{
+                $validatedData = $this->validate();
+                Question::whereId($this->questionObject->id)->update(array_merge($validatedData));
+            }
         }else {
             Question::whereId($this->questionObject->id)->update($validatedData);
         }
