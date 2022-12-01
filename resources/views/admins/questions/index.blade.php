@@ -11,9 +11,9 @@
                             <th>
                                 السؤال
                             </th>
-                            
+
                             <th>
-                                الاعدادات 
+                                الاعدادات
                             </th>
 
                         </tr>
@@ -21,30 +21,30 @@
 
                     <tbody>
                         @foreach ($quiz->questions as $question)
-                        <tr>
-                            <td style="width: 50%;overflow-x:unset">
-                                @if ($quiz->type == 'photo')
-                                    <img src="{{ asset('img/questions/' . $question->id . '/' . $question->image_url) }}"
-                                        alt="image-question" style="width: 100px;height:100px">
-                                @else
-                                    {{ $question->question }}
-                                @endif
-                            </td>
-                        
-                            <td>
+                            <tr>
+                                <td style="width: 50%;overflow-x:unset">
+                                    @if ($quiz->type == 'photo')
+                                        <img src="{{ asset('img/questions/' . $question->id . '/' . $question->image_url) }}"
+                                            alt="image-question" style="width: 100px;height:100px">
+                                    @else
+                                        {{ $question->question }}
+                                    @endif
+                                </td>
+
+                                <td>
                                     <a href="{{ route('admin.question.edit', ['id' => $question->id]) }}"
                                         class="default-btn">تعديل</a>
-                                  
-                                        <a href="{{ route('admin.question.delete', ['id' => $question->id]) }}"
-                                            class="default-btn">حذف</a>
-                            </td>
 
-                        </tr>
+                                    <a href="{{ route('admin.question.delete', ['id' => $question->id]) }}"
+                                        class="default-btn">حذف</a>
+                                </td>
+
+                            </tr>
                         @endforeach
                         @if (count($quiz->questions) == 0)
                             <tr>
                                 <td colspan="2" class="text-center">
-                                    لا يوجد اى اسألة
+                                    لا يوجد اى اسئلة
                                 </td>
                             </tr>
                         @endif
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-            
+
         </div>
     </section>
 @endsection
