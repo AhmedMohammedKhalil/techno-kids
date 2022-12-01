@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
+use Illuminate\Http\Request;
+
 
 class QuizController extends Controller
 {
@@ -13,7 +15,10 @@ class QuizController extends Controller
      */
     public function index()
     {
-        //
+        $quizzes = Quiz::all();
+        $page_name = 'لوحة تحكم الاختبارات';
+
+        return view('admins.quizzes.index',compact('page_name','quizzes'));
     }
 
     /**
@@ -22,8 +27,9 @@ class QuizController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    { 
+        $page_name = 'إضافة اختبار جديد';
+        return view('admins.quizzes.create',compact('page_name'));
     }
 
 
@@ -34,9 +40,11 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function show(Quiz $quiz)
+    public function show(Request $r)
     {
-        //
+        $quiz = Quiz::whereId($r->id)->first();
+        $page_name = 'عرض الاختبار';
+        return view('admins.quizzes.show', compact('quiz', 'page_name'));
     }
 
     /**
@@ -45,9 +53,11 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function edit(Quiz $quiz)
+    public function edit(Request $r)
     {
-        //
+        $quiz = Quiz::whereId($r->id)->first();
+        $page_name = 'تعديل الاختبار';
+        return view('admins.quizzes.edit',compact('quiz','page_name'));
     }
 
 
@@ -58,8 +68,9 @@ class QuizController extends Controller
      * @param  \App\Models\Quiz  $quiz
      * @return \Illuminate\Http\Response
      */
-    public function delete(Quiz $quiz)
+    public function delete(Request $r)
     {
-        //
+        Quiz::destroy($r->id);
+        return redirect()->route('admin.quiz.index');
     }
 }

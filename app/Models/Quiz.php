@@ -10,7 +10,7 @@ class Quiz extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'subtiltle','description','points','question_point','type','topic_id'
+        'title', 'subtitle','description','points','question_point','type','topic_id'
     ];
 
     /**
