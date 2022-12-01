@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Question;
 use App\Models\Quiz;
 use Illuminate\Http\Request;
 
@@ -33,20 +34,6 @@ class QuizController extends Controller
     }
 
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Quiz  $quiz
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $r)
-    {
-        $quiz = Quiz::whereId($r->id)->first();
-        $page_name = 'عرض الاختبار';
-        return view('admins.quizzes.show', compact('quiz', 'page_name'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -70,6 +57,10 @@ class QuizController extends Controller
      */
     public function delete(Request $r)
     {
+        $questions=Question::where('quiz_id',$r->id)->get();
+        foreach ($questions as $q) {
+            $q->delete();
+        }
         Quiz::destroy($r->id);
         return redirect()->route('admin.quiz.index');
     }

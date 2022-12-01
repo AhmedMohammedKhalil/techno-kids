@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
 
+use App\Models\Question;
+use App\Models\Quiz;
+use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
     /**
@@ -11,9 +13,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $r)
     {
-        //
+            $quiz = Quiz::whereId($r->id)->first();
+            $page_name = 'عرض الأسئلة';
+            return view('admins.questions.index', compact('quiz', 'page_name'));
     }
 
     /**

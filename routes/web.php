@@ -56,7 +56,6 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
         Route::get('/','QuizController@index')->name('index');
         Route::get('/create','QuizController@create')->name('create');
         Route::get('/edit','QuizController@edit')->name('edit');
-        Route::get('/show','QuizController@show')->name('show');
         Route::get('/delete','QuizController@delete')->name('delete');
     });
 

@@ -38,13 +38,11 @@
                                 @if ( count($quiz->kids) == 0)
                                     <a href="{{ route('admin.quiz.edit', ['id' => $quiz->id]) }}"
                                         class="default-btn">تعديل</a>
-                                    @if (count($quiz->questions) == 0 && count($quiz->kids) == 0)
                                         <a href="{{ route('admin.quiz.delete', ['id' => $quiz->id]) }}"
                                             class="default-btn">حذف</a>
                                     @endif
-                                    <a href="{{ route('admin.quiz.show', ['id' => $quiz->id]) }}"
+                                    <a href="{{ route('admin.question.index', ['id' => $quiz->id]) }}"
                                         class="default-btn">عرض</a>
-                                @endif
                                 </td>
                                 
                             </tr>

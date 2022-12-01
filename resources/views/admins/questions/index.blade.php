@@ -11,7 +11,7 @@
                             <th>
                                 السؤال
                             </th>
-
+                            
                             <th>
                                 الاعدادات 
                             </th>
@@ -30,6 +30,7 @@
                                     {{ $question->question }}
                                 @endif
                             </td>
+                        
                             <td>
                                     <a href="{{ route('admin.question.edit', ['id' => $question->id]) }}"
                                         class="default-btn">تعديل</a>
