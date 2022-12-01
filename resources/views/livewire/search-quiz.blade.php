@@ -1,0 +1,26 @@
+<div>
+    @if (count($quizzes) > 0)
+        <section class="container pt-70 pb-70">
+            <div class="row">
+                <div class="col-lg-9 mx-auto">
+                    <aside class="widget-area">
+                        <section class="widget widget_search">
+                            <form class="search-form" wire:submit.prevent='makeSearch'>
+                                <label>
+                                    <input type="search" class="search-field" wire:model.lazy="search"
+                                        placeholder="ابحث عن اختبار">
+                                </label>
+                                <button type="submit">
+                                    <i class='bx bx-search-alt'></i>
+                                </button>
+
+                            </form>
+                        </section>
+                    </aside>
+                </div>
+            </div>
+
+        </section>
+    @endif
+    @include('includes.quizzes', ['flag' => true, 'kid_control' => false])
+</div>

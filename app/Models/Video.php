@@ -10,7 +10,7 @@ class Video extends Model
     use HasFactory;
 
     protected $fillable = [
-        'video_url','description','topic_id'
+        'title','video_url','description','topic_id'
     ];
 
     /**

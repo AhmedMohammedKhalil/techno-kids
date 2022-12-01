@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('subtiltle');
+            $table->text('subtitle');
             $table->text('description');
             $table->integer('points');
             $table->integer('question_point');

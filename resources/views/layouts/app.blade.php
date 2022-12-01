@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" />
     <!-- RTL CSS -->
     <link rel="stylesheet" href="{{ asset('css/rtl.css') }}" />
-
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}" />
@@ -48,8 +48,19 @@
         .navbar-brand img {
             max-width: 100px !important
         }
+
+        a:hover,
+        a:focus {
+            color: #1b0238;
+
+        }
+
+        .widget-area .widget_search {
+            -webkit-box-shadow: 0 0 1.25rem rgb(108 118 134 / 74%);
+            box-shadow: 0 0 1.25rem rgb(108 118 134 / 74%);
+        }
     </style>
-    <!-- Scripts -->
+
     @livewireStyles
     @stack('css')
 </head>
@@ -89,15 +100,15 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> الفيديوهات </a>
+                                <a href="{{ route('videos') }}" class="nav-link"> الفيديوهات </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> الأختبارات </a>
+                                <a href="{{ route('quizzes') }}" class="nav-link"> الأختبارات </a>
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> من نحن </a>
+                                <a href="{{ route('aboutus') }}" class="nav-link"> من نحن </a>
                             </li>
 
                         </ul>

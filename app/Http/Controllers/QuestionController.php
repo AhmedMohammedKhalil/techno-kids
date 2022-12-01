@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Question;
 
+use App\Models\Question;
+use App\Models\Quiz;
+use Illuminate\Http\Request;
 class QuestionController extends Controller
 {
     /**
@@ -11,9 +13,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $r)
     {
-        //
+            $quiz = Quiz::whereId($r->id)->first();
+            $page_name = 'عرض الأسئلة';
+            return view('admins.questions.index', compact('quiz', 'page_name'));
     }
 
     /**
@@ -21,9 +25,11 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(Request $r)
+    { 
+        $quiz=Quiz::where('id',$r->id)->first();
+        $page_name = 'إضافة سؤال جديد';
+        return view('admins.questions.create',compact('page_name','quiz'));
     }
 
 
@@ -39,27 +45,23 @@ class QuestionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Question $question)
+
+    public function edit(Request $r)
     {
-        //
+        $id = $r->id;
+        $page_name = 'تعديل السؤال';
+        return view('admins.questions.edit',compact('page_name','id'));
     }
 
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Question  $question
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Question $question)
+    public function delete(Request $r)
     {
-        //
+        $question = Question::whereId($r->id)->first();
+        $quiz = Quiz::whereId($question->quiz_id)->first();
+        $quiz->points -= $quiz->question_point;
+        $quiz->save();
+        $question->delete();
+        return redirect()->route('admin.question.index',['id'=>$quiz->id]);
     }
 }

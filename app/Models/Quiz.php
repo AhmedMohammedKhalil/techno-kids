@@ -10,7 +10,7 @@ class Quiz extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'subtiltle','description','points','question_point','type','topic_id'
+        'title', 'subtitle','description','points','question_point','type','topic_id'
     ];
 
     /**
@@ -29,7 +29,7 @@ class Quiz extends Model
     }
     public function kids()
     {
-        return $this->belongsToMany(Kid::class,'test')->withTimestamps();
+        return $this->belongsToMany(Kid::class,'test')->withPivot('score')->as('tests')->withTimestamps();
     }
 
 }

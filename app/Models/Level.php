@@ -10,7 +10,7 @@ class Level extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'range'
+        'name', 'range_start','range_end'
     ];
 
     /**

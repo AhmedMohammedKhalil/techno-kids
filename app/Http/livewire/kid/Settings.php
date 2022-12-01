@@ -70,7 +70,7 @@ class Settings extends Component
             Kid::whereId($this->kid_id)->update(array_merge($data,['image_url' => $photoname]));
             $dir = public_path('img/kids/'.$this->kid_id);
             if(file_exists($dir))
-                File::deleteDirectories($dir);
+                File::deleteDirectory($dir);
             else
                 mkdir($dir);
             $this->image_url->storeAs('img/kids/'.$this->kid_id,$photoname);

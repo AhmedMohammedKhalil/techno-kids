@@ -15,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
+Route::get('/all-videos', 'HomeController@showVideos')->name('videos');
+Route::get('/topic_details', 'HomeController@showTopic')->name('topic_details');
+Route::get('/video_details', 'HomeController@showVideo')->name('video_details');
+Route::get('/all-quizzes', 'HomeController@showQuizzes')->name('quizzes');
+Route::get('/quiz_details', 'HomeController@showQuiz')->name('quiz_details');
+
+
+
 Route::middleware(['guest:admin', 'guest:kid'])->group(function () {
     Route::get('/admin/login', 'AdminController@showLoginForm')->name('admin.login');
     Route::get('/kid/login', 'KidController@showLoginForm')->name('kid.login');
@@ -39,6 +48,7 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
     Route::prefix('/videos')->name('video.')->group(function () {
         Route::get('/','VideoController@index')->name('index');
         Route::get('/create','VideoController@create')->name('create');
+        Route::get('/show','VideoController@show')->name('show');
         Route::get('/edit','VideoController@edit')->name('edit');
         Route::get('/delete','VideoController@delete')->name('delete');
     });
@@ -50,6 +60,13 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
         Route::get('/delete','QuizController@delete')->name('delete');
     });
 
+    Route::prefix('/questions')->name('question.')->group(function () {
+        Route::get('/','QuestionController@index')->name('index');
+        Route::get('/create','QuestionController@create')->name('create');
+        Route::get('/edit','QuestionController@edit')->name('edit');
+        Route::get('/show','QuestionController@show')->name('show');
+        Route::get('/delete','QuestionController@delete')->name('delete');
+    });
 
 
 });
@@ -57,6 +74,8 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
 
 Route::middleware(['auth:kid'])->name('kid.')->prefix('kid')->group(function () {
     Route::get('/profile','KidController@profile')->name('profile');
+    Route::get('/tests','KidController@showTests')->name('tests');
+    Route::get('/quiz_result', 'KidController@result')->name('quiz_result');
     Route::get('/settings','KidController@settings')->name('settings');
     Route::get('/changePassword','KidController@changePassword')->name('changePassword');
     Route::get('/logout','KidController@logout')->name('logout');
