@@ -108,7 +108,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="contact.html" class="nav-link"> من نحن </a>
+                                <a href="{{ route('aboutus') }}" class="nav-link"> من نحن </a>
                             </li>
 
                         </ul>

@@ -5,9 +5,10 @@
                 <div class="col-lg-9 mx-auto">
                     <aside class="widget-area">
                         <section class="widget widget_search">
-                            <form class="search-form">
+                            <form class="search-form" wire:submit.prevent='makeSearch'>
                                 <label>
-                                    <input type="search" class="search-field" placeholder="ابحث عن فيديو">
+                                    <input type="search" class="search-field" wire:model.lazy="search"
+                                        placeholder="ابحث عن فيديو">
                                 </label>
                                 <button type="submit">
                                     <i class='bx bx-search-alt'></i>

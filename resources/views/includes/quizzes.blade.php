@@ -1,13 +1,15 @@
 @if (count($quizzes) > 0)
-    <section class="event-area event-item-two pt-100 pb-70">
+    <section class="event-area event-item-two pb-70" @if (!$kid_control) style="padding-top: 50px" @endif>
         <div class="container-fluid">
-            <div class="section-title">
-                <span>اختبر نفسك الان</span>
-                <h2>الاختبارات</h2>
-            </div>
+            @if (!$kid_control)
+                <div class="section-title">
+                    <span>اختبر نفسك الان</span>
+                    <h2>الاختبارات</h2>
+                </div>
+            @endif
             <div class="row">
                 @foreach ($quizzes as $q)
-                    <div class="col-lg-6">
+                    <div class="@if ($kid_control) col-lg-12 @else col-lg-6 @endif">
                         <div class="event-box-item">
                             <div class="row align-items-center">
                                 <div class="col-md-3">
@@ -27,28 +29,40 @@
                                             @else
                                                 # @endif
                                             ">{{ $q->title }}
-                                                @auth('admin') >> عرض @endauth @auth('kid') >> ابدأ الان
-                @endif
-                </a>
-                </h3>
-                <p>{{ $q->description }}</p>
-                <span>{{ $q->topic->title }}</span>
-            </div>
-        </div>
+                                                @auth('admin')
+                                                    >> عرض
+                                                @endauth
+                                                @auth('kid')
+                                                    @if ($kid_control)
+                                                        >> اعد الامتحان
+                                                    @else
+                                                        >> ابدا الأن
+                                                    @endif
+                                                @endauth
+                                            </a>
+                                        </h3>
+                                        <p>{{ $q->description }}</p>
+                                        <span>{{ $q->topic->title }}</span>
+                                        @if ($kid_control)
+                                            <p>امتحن {{ $q->tests->created_at->diffForhumans() }}</p>
+                                            <span>الدرجة : {{ $q->tests->score }} / {{ $q->points }}</span>
+                                        @endif
+                                    </div>
+                                </div>
 
-        <div class="col-md-3">
-            <div class="event-date">
-                <h4>{{ $q->created_at->format('d') }}</h4>
-                <span>{{ $q->created_at->format('F') }}</span>
+                                <div class="col-md-3">
+                                    <div class="event-date">
+                                        <h4>{{ $q->created_at->format('d') }}</h4>
+                                        <span>{{ $q->created_at->format('F') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
-        </div>
-        </div>
-        </div>
-@endforeach
-</div>
-</div>
-</section>
+    </section>
 @endif
 
 @if ($flag == true)

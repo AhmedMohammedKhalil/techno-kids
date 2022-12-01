@@ -18,7 +18,22 @@ class LevelSeeder extends Seeder
         DB::table('levels')->insert([
             'name' => 'مبتدئ',
             'range_start' => 0,
+            'range_end' => 50,
+        ]);
+        DB::table('levels')->insert([
+            'name' => 'متوسط',
+            'range_start' => 50,
             'range_end' => 100,
+        ]);
+        DB::table('levels')->insert([
+            'name' => 'ممتاز',
+            'range_start' => 100,
+            'range_end' => 150,
+        ]);
+        DB::table('levels')->insert([
+            'name' => 'متقدم',
+            'range_start' => 150,
+            'range_end' => 200,
         ]);
     }
 }
