@@ -16,7 +16,7 @@
         @auth('kid')
             <ul>
                 <li><a href="{{ route('kid.profile') }}">البروفايل</a></li>
-                <li><a href="#">الاختبارات</a></li>
+                <li><a href="{{ route('kid.tests') }}">الاختبارات</a></li>
                 <li><a href="{{ route('kid.changePassword') }}">تغيير كلمة السر</a></li>
                 <li><a href="{{ route('kid.settings') }}">الإعدادات</a></li>
                 <li><a href="{{ route('kid.logout') }}">خروج</a></li>

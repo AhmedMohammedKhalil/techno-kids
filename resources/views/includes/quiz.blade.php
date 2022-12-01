@@ -24,7 +24,7 @@
         <h3>{{ $quiz->subtitle }}</h3>
         <div class="options row pt-10 pb-10">
             @foreach ($options as $option)
-                <div id="{{ $option->id }}" class="drag" draggable="true" style="">
+                <div data-id="{{ $option->id }}" class="drag" draggable="true" style="">
                     {{ $option->answer }}
                 </div>
             @endforeach
@@ -58,6 +58,14 @@
                             </td>
                         </tr>
                     @endforeach
+                    @auth('kid')
+                        <tr>
+                            <td colspan="2">
+                                <span class="text-danger error"></span>
+                                <button class="check-answer d-block default-btn mx-auto my-2">عرض النتيجة</button>
+                            </td>
+                        </tr>
+                    @endauth
                 </tbody>
             </table>
 
@@ -71,6 +79,8 @@
     <script>
         $(document).ready(function() {
             // Enable drag and drop...
+            var quiz = {!! json_encode($quiz) !!};
+
             function dragAndDrop(dragTarget, dropTarget) {
                 // Enable draggable events...
                 $(dragTarget).draggable({
@@ -103,6 +113,33 @@
             // Enable drag and drop in both directions...
             dragAndDrop(".drag", ".answer");
             dragAndDrop(".drag", ".options");
+
+
+
+            $(".check-answer").on("click", function() {
+
+                // Check the guess against each answer in the answers array, and increment the score if they match...
+                var length = 0;
+                var score = 0;
+                $(".answer").each(function(i) {
+                    var answer = $(this).find("div");
+                    if (answer.text() != "") {
+                        if (answer.attr('data-id') == quiz.questions[length].id) {
+                            score += quiz.question_point;
+                        }
+                        length++;
+                    }
+                });
+                console.log(length)
+                if (length != quiz.questions.length) {
+                    $('.error').text('لابد من اكمال الاختبار وحل جميع الاسئلة');
+                } else {
+                    $('.error').text('');
+                    window.location.replace("{{ route('kid.quiz_result') }}?score=" + score +
+                        "&id=" + quiz.id);
+                }
+
+            });
         });
     </script>
 @endpush

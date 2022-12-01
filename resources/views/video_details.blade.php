@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <!-- Start Page Banner -->
-    <div class="page-banner-area item-bg2">
+    <div class="page-banner-area item-bg4">
         <div class="d-table">
             <div class="d-table-cell">
                 <div class="container">

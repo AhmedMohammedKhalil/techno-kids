@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/aboutus', 'HomeController@aboutus')->name('aboutus');
 Route::get('/all-videos', 'HomeController@showVideos')->name('videos');
 Route::get('/topic_details', 'HomeController@showTopic')->name('topic_details');
 Route::get('/video_details', 'HomeController@showVideo')->name('video_details');
@@ -73,6 +74,8 @@ Route::middleware(['auth:admin'])->name('admin.')->prefix('admin')->group(functi
 
 Route::middleware(['auth:kid'])->name('kid.')->prefix('kid')->group(function () {
     Route::get('/profile','KidController@profile')->name('profile');
+    Route::get('/tests','KidController@showTests')->name('tests');
+    Route::get('/quiz_result', 'KidController@result')->name('quiz_result');
     Route::get('/settings','KidController@settings')->name('settings');
     Route::get('/changePassword','KidController@changePassword')->name('changePassword');
     Route::get('/logout','KidController@logout')->name('logout');

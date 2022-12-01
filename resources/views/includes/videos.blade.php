@@ -1,6 +1,6 @@
 @if (count($videos) > 0)
     <!-- Start Class Area -->
-    <section class="class-area pt-100 pb-70">
+    <section class="class-area pb-70" style="padding-top: 50px">
         <div class="container">
             <div class="section-title">
                 <span>اتعلم الان</span>
@@ -25,8 +25,9 @@
                                     {{ $video->description }}
                                 </p>
                                 <ul class="class-list">
-                                    <li><span>الموضوع : </span>{{ $video->topic->title }}</li>
-                                    <li><span>التاريخ : </span>{{ $video->created_at }}</li>
+                                    <li class="d-block"><span>الموضوع : </span>{{ $video->topic->title }}</li>
+                                    <li class="d-block"><span>التاريخ : </span>{{ $video->created_at }}
+                                    </li>
                                 </ul>
 
                                 <div class="class-btn">

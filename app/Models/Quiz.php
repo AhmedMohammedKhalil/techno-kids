@@ -29,7 +29,7 @@ class Quiz extends Model
     }
     public function kids()
     {
-        return $this->belongsToMany(Kid::class,'test')->withTimestamps();
+        return $this->belongsToMany(Kid::class,'test')->withPivot('score')->as('tests')->withTimestamps();
     }
 
 }

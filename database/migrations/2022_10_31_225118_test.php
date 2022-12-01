@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('kid_id')->unsigned();
             $table->integer('quiz_id')->unsigned();
-
+            $table->integer('score');
             $table->foreign('kid_id')
             ->references('id')
             ->on('kids')->onDelete("cascade")->onUpdate("cascade");

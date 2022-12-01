@@ -29,6 +29,6 @@ class Kid extends Authenticatable
     }
     public function quizzes()
     {
-        return $this->belongsToMany(Quiz::class,'test')->withTimestamps();
+        return $this->belongsToMany(Quiz::class,'test')->withPivot('score')->as('tests')->withTimestamps();
     }
 }

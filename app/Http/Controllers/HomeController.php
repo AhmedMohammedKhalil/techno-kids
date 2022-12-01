@@ -23,13 +23,20 @@ class HomeController extends Controller
 
         return view('home',compact('topics','videos'));
     }
+    public function aboutus()
+    {
+        $page_name = 'من نحن';
+        return view('aboutus',compact('page_name'));
+    }
 
     public function showTopic(Request $r)
     {
         $topic= Topic::whereId($r->id)->first();
         $page_name = $topic->title;
         $videos = $topic->videos;
-        return view('topic_details',compact('topic','page_name','videos'));
+        $quizzes = $topic->quizzes;
+
+        return view('topic_details',compact('topic','page_name','videos','quizzes'));
     }
 
     public function showVideo(Request $r)
@@ -57,7 +64,9 @@ class HomeController extends Controller
     {
         $quiz= Quiz::whereId($r->id)->first();
         $page_name = $quiz->title;
-        $options = $quiz->questions()->inRandomOrder()->select('answer')->get();
+        $options = $quiz->questions()->inRandomOrder()->get();
         return view('quiz_details',compact('quiz','page_name','options'));
     }
+
+
 }

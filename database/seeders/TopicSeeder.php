@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class TopicSeeder extends Seeder
 {
@@ -14,6 +16,27 @@ class TopicSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('topics')->insert([
+            [
+                'title' => 'اساسيات علم الحاسوب',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'title' => 'اجهزة الحاسب الالى',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'title' => 'شبكة الانترنت',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ],
+            [
+                'title' => 'محتويات الحاسب الالى',
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ]
+        ]);
     }
 }

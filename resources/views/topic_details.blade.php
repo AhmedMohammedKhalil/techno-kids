@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <!-- Start Page Banner -->
-    <div class="page-banner-area item-bg2">
+    <div class="page-banner-area item-bg1">
         <div class="d-table">
             <div class="d-table-cell">
                 <div class="container">
@@ -20,4 +20,5 @@
     </div>
     <!-- End Page Banner -->
     @include('includes.videos', ['flag' => true])
+    @include('includes.quizzes', ['flag' => true, 'kid_control' => false])
 @endsection
