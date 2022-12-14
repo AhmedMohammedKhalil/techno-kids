@@ -71,11 +71,13 @@
 
         </div>
     </div>
+    <audio id="audio" src="" style="display: none"></audio>
 </section>
 
 @push('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Enable drag and drop...
@@ -114,7 +116,30 @@
             dragAndDrop(".drag", ".answer");
             dragAndDrop(".drag", ".options");
 
+            var track = document.getElementById("audio");
 
+            function redirect(score, quiz_id) {
+                window.location.replace("{{ route('kid.quiz_result') }}?score=" + score +
+                    "&id=" + quiz_id);
+            }
+
+
+            function loading(audioPath) {
+                var request = new XMLHttpRequest();
+                console.log(audioPath);
+                request.open("GET", audioPath, true);
+                request.responseType = "blob";
+                request.onload = function() {
+                    console.log('done')
+                    if (this.status == 200) {
+                        track.setAttribute('src', URL.createObjectURL(this.response))
+                        track.load();
+                        track.play();
+                    }
+                }
+                request.send();
+
+            }
 
             $(".check-answer").on("click", function() {
 
@@ -130,16 +155,28 @@
                         length++;
                     }
                 });
-                console.log(length)
                 if (length != quiz.questions.length) {
                     $('.error').text('لابد من اكمال الاختبار وحل جميع الاسئلة');
                 } else {
                     $('.error').text('');
-                    window.location.replace("{{ route('kid.quiz_result') }}?score=" + score +
-                        "&id=" + quiz.id);
+                    if (quiz.points == score) {
+                        var audioPath = '{!! asset('sounds/success.mp3') !!}';
+                        loading(audioPath);
+                        setTimeout(() => {
+                            redirect(score, quiz.id)
+                        }, 3000);
+                    } else {
+                        var audioPath = '{!! asset('sounds/failure.mp3') !!}';
+                        loading(audioPath);
+                        setTimeout(() => {
+                            redirect(score, quiz.id)
+                        }, 3000);
+                    }
                 }
 
             });
+
+
         });
     </script>
 @endpush

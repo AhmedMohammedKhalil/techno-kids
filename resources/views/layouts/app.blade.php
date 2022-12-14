@@ -66,7 +66,6 @@
 </head>
 
 <body>
-
     <!-- Start Preloader Area -->
     <div class="preloader">
         <div class="loader">
