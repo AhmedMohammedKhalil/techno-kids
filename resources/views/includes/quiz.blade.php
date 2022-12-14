@@ -170,7 +170,7 @@
                         loading(audioPath);
                         setTimeout(() => {
                             redirect(score, quiz.id)
-                        }, 3000);
+                        }, 4000);
                     }
                 }
 
